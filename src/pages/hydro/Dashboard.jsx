@@ -26,7 +26,7 @@ const Dashboard = () => {
             <Grid.Row columns='3'>
                 <Grid.Column>
                     <Segment textAlign='center' color='blue' style={{overflow:'auto'}}>
-                        <Statistic label='Jam' value={jam} color='blue' />
+                        <Statistic label='Today' value={jam} color='blue' />
                     </Segment>
                 </Grid.Column>
                 <Grid.Column>
