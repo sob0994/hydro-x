@@ -3,14 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import Dashboard from "./pages/hydro/Dashboard";
 import reportWebVitals from "./reportWebVitals";
-import ThemeProvider from "./hooks/theme/Theme";
 import "semantic-ui-css/semantic.min.css";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<ThemeProvider>
-			<Dashboard />
-		</ThemeProvider>
+		<Dashboard />
 	</React.StrictMode>,
 	document.getElementById("root")
 );
