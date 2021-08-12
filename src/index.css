@@ -1,13 +1,23 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-color: #e6e6e6 !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.my-bg-1{
+  background: linear-gradient(324deg, rgba(177,0,114,1) 0%, rgba(0,185,99,1) 100%);
+}
+
+.my-bg-2{
+  background: linear-gradient(324deg, rgba(255,0,164,1) 0%, rgba(0,232,255,1) 100%);
+}
+.my-bg-2i{
+  background: linear-gradient(324deg, rgba(255,0,164,1) 0%, rgba(0,232,255,1) 100%) !important;
+  transition: all 1s;
+}
+.my-bg-2i:hover{
+  background: linear-gradient(162deg, rgba(255,0,164,0.9) 0%, rgba(0,232,255,0.9) 250%) !important;
+}
+
+.clr1{
+  color: linear-gradient(324deg, rgba(255,0,164,1) 0%, rgba(0,232,255,1) 250%) !important;
 }
