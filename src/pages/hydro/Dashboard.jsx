@@ -76,7 +76,7 @@ const Dashboard = () => {
           </Grid.Column>
         </Grid.Row>
       </Transition>
-      <Transition visible={!load} animation="slide down" duration={2000}>
+      <Transition visible={!load} animation="slide down" duration={1500}>
         <Grid.Row columns="1">
           <Grid.Column>
             <Header as="h1" textAlign="center" color="grey">
