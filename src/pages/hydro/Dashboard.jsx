@@ -12,50 +12,10 @@ import {
 import dateformat from "dateformat";
 import img1 from "../../assets/img.svg";
 import img2 from "../../assets/logo.png";
+import axios from "axios";
 
 const Dashboard = () => {
-  const [data, setData] = useState([
-    {
-      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
-      tds: 200.0,
-      flow: 200.0,
-    },
-    {
-      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
-      tds: 300.0,
-      flow: 400.0,
-    },
-    {
-      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
-      tds: 200.0,
-      flow: 200.0,
-    },
-    {
-      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
-      tds: 300.0,
-      flow: 400.0,
-    },
-    {
-      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
-      tds: 200.0,
-      flow: 200.0,
-    },
-    {
-      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
-      tds: 300.0,
-      flow: 400.0,
-    },
-    {
-      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
-      tds: 200.0,
-      flow: 200.0,
-    },
-    {
-      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
-      tds: 300.0,
-      flow: 400.0,
-    },
-  ]);
+  const [data, setData] = useState([]);
   const [jam, setJam] = useState(dateformat(Date.now(), "HH:MM:ss"));
   const [load, setLoad] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
@@ -63,6 +23,21 @@ const Dashboard = () => {
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const getData = () => {
+      axios.get("https://boyler-app.herokuapp.com/api/sensors").then((data) => {
+        setData(data.data.data);
+      });
+    };
+    const interval = setInterval(() => {
+      axios.get("https://boyler-app.herokuapp.com/api/sensors").then((data) => {
+        setData(data.data.data);
+      });
+    }, 4000);
+    getData();
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -106,16 +81,11 @@ const Dashboard = () => {
         </Grid.Column>
         <Grid.Column style={{ display: "flex", alignItems: "center" }}>
           <Transition visible={!load} animation="drop" duration={1000}>
-            <Header
-              style={{ margin: "auto" }}
-              as="h1"
-              textAlign="center"
-              color="grey"
-            >
+            <Header style={{ margin: "auto" }} as="h1" textAlign="center">
               <Header.Content>
                 SMART HYDROPONIC
                 <Header.Subheader>
-                  New Technology of Hydroponic
+                  Desa Sanding, Tampaksiring, Gianyar - Bali
                 </Header.Subheader>
               </Header.Content>
             </Header>
@@ -181,16 +151,20 @@ const Dashboard = () => {
                     <Table.Row textAlign="center">
                       <Table.HeaderCell>Day</Table.HeaderCell>
                       <Table.HeaderCell>TDS</Table.HeaderCell>
-                      <Table.HeaderCell>Flow Meter</Table.HeaderCell>
+                      <Table.HeaderCell>Nutrisi A</Table.HeaderCell>
+                      <Table.HeaderCell>Nutrisi B</Table.HeaderCell>
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
                     {data.map((data, idx) => {
                       return (
                         <Table.Row keys={idx} textAlign="center">
-                          <Table.Cell>{data.waktu}</Table.Cell>
+                          <Table.Cell>
+                            {dateformat(data.waktu, "dd-mm-yyyy HH:MM:ss")}
+                          </Table.Cell>
                           <Table.Cell>{data.tds}</Table.Cell>
-                          <Table.Cell>{data.flow}</Table.Cell>
+                          <Table.Cell>{data.flow1}</Table.Cell>
+                          <Table.Cell>{data.flow2}</Table.Cell>
                         </Table.Row>
                       );
                     })}
