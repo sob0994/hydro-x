@@ -25,6 +25,36 @@ const Dashboard = () => {
       tds: 300.0,
       flow: 400.0,
     },
+    {
+      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
+      tds: 200.0,
+      flow: 200.0,
+    },
+    {
+      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
+      tds: 300.0,
+      flow: 400.0,
+    },
+    {
+      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
+      tds: 200.0,
+      flow: 200.0,
+    },
+    {
+      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
+      tds: 300.0,
+      flow: 400.0,
+    },
+    {
+      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
+      tds: 200.0,
+      flow: 200.0,
+    },
+    {
+      waktu: dateformat(Date.now(), "dd-mm-yyyy HH:MM:ss"),
+      tds: 300.0,
+      flow: 400.0,
+    },
   ]);
   const [jam, setJam] = useState(dateformat(Date.now(), "HH:MM:ss"));
   const [load, setLoad] = useState(true);
@@ -126,48 +156,52 @@ const Dashboard = () => {
           </Grid.Column>
         </Transition>
       </Grid.Row>
-      <Grid.Row centered columns="1">
-        {/* <div> */}
-        <Button
-          color="violet"
-          onClick={handleOpen}
-          style={{ marginBottom: "1rem" }}
-        >
-          {isOpen ? "Hide History Data" : "Show History Data"}
-        </Button>
-        {/* </div> */}
+      <Transition visible={!load} animation="slide down" duration={1200}>
+        <Grid.Row centered columns="1">
+          {/* <div> */}
+          <Button
+            color="violet"
+            onClick={handleOpen}
+            style={{ marginBottom: "1rem" }}
+          >
+            {isOpen ? "Hide History Data" : "Show History Data"}
+          </Button>
 
-        <Transition visible={isOpen} animation="slide down" duration={1200}>
-          <Grid.Column>
-            <Segment
-              textAlign="center"
-              color="orange"
-              style={{ overflow: "auto" }}
-            >
-              <Table size="small" celled unstackable striped fluid>
-                <Table.Header>
-                  <Table.Row textAlign="center">
-                    <Table.HeaderCell>Day</Table.HeaderCell>
-                    <Table.HeaderCell>TDS</Table.HeaderCell>
-                    <Table.HeaderCell>Flow Meter</Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-                <Table.Body>
-                  {data.map((data, idx) => {
-                    return (
-                      <Table.Row keys={idx} textAlign="center">
-                        <Table.Cell>{data.waktu}</Table.Cell>
-                        <Table.Cell>{data.tds}</Table.Cell>
-                        <Table.Cell>{data.flow}</Table.Cell>
-                      </Table.Row>
-                    );
-                  })}
-                </Table.Body>
-              </Table>
-            </Segment>
-          </Grid.Column>
-        </Transition>
-      </Grid.Row>
+          {/* </div> */}
+
+          <Transition visible={isOpen} animation="slide down" duration={1200}>
+            <Grid.Column>
+              <Segment
+                textAlign="center"
+                color="orange"
+                style={{ overflow: "auto", maxHeight: "300px" }}
+              >
+                <Table size="small" celled unstackable striped fluid>
+                  <Table.Header>
+                    <Table.Row textAlign="center">
+                      <Table.HeaderCell>Day</Table.HeaderCell>
+                      <Table.HeaderCell>TDS</Table.HeaderCell>
+                      <Table.HeaderCell>Flow Meter</Table.HeaderCell>
+                    </Table.Row>
+                  </Table.Header>
+                  <Table.Body>
+                    {data.map((data, idx) => {
+                      return (
+                        <Table.Row keys={idx} textAlign="center">
+                          <Table.Cell>{data.waktu}</Table.Cell>
+                          <Table.Cell>{data.tds}</Table.Cell>
+                          <Table.Cell>{data.flow}</Table.Cell>
+                        </Table.Row>
+                      );
+                    })}
+                  </Table.Body>
+                </Table>
+              </Segment>
+            </Grid.Column>
+          </Transition>
+        </Grid.Row>
+      </Transition>
+
       <Transition visible={!load} animation="slide down" duration={1500}>
         <Grid.Row columns="1">
           <Grid.Column>
