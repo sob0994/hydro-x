@@ -19,9 +19,11 @@ const Dashboard = () => {
   const [jam, setJam] = useState(dateformat(Date.now(), "HH:MM:ss"));
   const [load, setLoad] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const last = data.length - 1;
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
+    console.log(last);
   };
 
   useEffect(() => {
@@ -108,7 +110,7 @@ const Dashboard = () => {
           <Grid.Column>
             <Segment textAlign="center" color="violet">
               <Statistic color="violet">
-                <Statistic.Value>0.00 PPM</Statistic.Value>
+                <Statistic.Value>{data[last]?.tds || 0.0} PPM</Statistic.Value>
                 <Statistic.Label>TDS</Statistic.Label>
               </Statistic>
             </Segment>
@@ -119,7 +121,7 @@ const Dashboard = () => {
             <Segment textAlign="center" color="purple">
               {/* <Statistic label="Flow Rate" value={0} color="purple" /> */}
               <Statistic color="purple">
-                <Statistic.Value>0.00 MM</Statistic.Value>
+                <Statistic.Value>{data[last]?.flow1 || 0.0} MM</Statistic.Value>
                 <Statistic.Label>FLOW METER</Statistic.Label>
               </Statistic>
             </Segment>
@@ -156,18 +158,21 @@ const Dashboard = () => {
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    {data.map((data, idx) => {
-                      return (
-                        <Table.Row keys={idx} textAlign="center">
-                          <Table.Cell>
-                            {dateformat(data.waktu, "dd-mm-yyyy HH:MM:ss")}
-                          </Table.Cell>
-                          <Table.Cell>{data.tds}</Table.Cell>
-                          <Table.Cell>{data.flow1}</Table.Cell>
-                          <Table.Cell>{data.flow2}</Table.Cell>
-                        </Table.Row>
-                      );
-                    })}
+                    {data
+                      .slice(0)
+                      .reverse()
+                      .map((data, idx) => {
+                        return (
+                          <Table.Row keys={idx} textAlign="center">
+                            <Table.Cell>
+                              {dateformat(data.waktu, "dd-mm-yyyy HH:MM:ss")}
+                            </Table.Cell>
+                            <Table.Cell>{data.tds}</Table.Cell>
+                            <Table.Cell>{data.flow1}</Table.Cell>
+                            <Table.Cell>{data.flow2}</Table.Cell>
+                          </Table.Row>
+                        );
+                      })}
                   </Table.Body>
                 </Table>
               </Segment>
