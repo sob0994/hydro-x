@@ -41,7 +41,7 @@ const Dashboard = () => {
         </Grid.Row>
       </Transition>
       <Grid.Row columns="3">
-        <Transition visible={!load} animation="fly right" duration={1200}>
+        <Transition visible={!load} animation="slide down" duration={1200}>
           <Grid.Column>
             <Segment
               textAlign="center"
@@ -52,14 +52,14 @@ const Dashboard = () => {
             </Segment>
           </Grid.Column>
         </Transition>
-        <Transition visible={!load} animation="fly up" duration={1200}>
+        <Transition visible={!load} animation="slide down" duration={1200}>
           <Grid.Column>
             <Segment textAlign="center" color="violet">
               <Statistic label="PPM" value={0} color="violet" />
             </Segment>
           </Grid.Column>
         </Transition>
-        <Transition visible={!load} animation="fly left" duration={1200}>
+        <Transition visible={!load} animation="slide down" duration={1200}>
           <Grid.Column>
             <Segment textAlign="center" color="purple">
               <Statistic label="Flow Rate" value={0} color="purple" />
@@ -67,7 +67,7 @@ const Dashboard = () => {
           </Grid.Column>
         </Transition>
       </Grid.Row>
-      <Transition visible={!load} animation="fly down" duration={1200}>
+      <Transition visible={!load} animation="slide up" duration={1200}>
         <Grid.Row columns="1">
           <Grid.Column>
             <Segment textAlign="center" color="orange">
@@ -76,7 +76,7 @@ const Dashboard = () => {
           </Grid.Column>
         </Grid.Row>
       </Transition>
-      <Transition visible={!load} animation="fade" duration={2000}>
+      <Transition visible={!load} animation="slide down" duration={2000}>
         <Grid.Row columns="1">
           <Grid.Column>
             <Header as="h1" textAlign="center" color="grey">
