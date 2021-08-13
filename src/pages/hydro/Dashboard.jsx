@@ -21,6 +21,8 @@ const Dashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const last = data.length - 1;
 
+  document.title = "Smart Hydroponic";
+
   const handleOpen = () => {
     setIsOpen(!isOpen);
     console.log(last);
