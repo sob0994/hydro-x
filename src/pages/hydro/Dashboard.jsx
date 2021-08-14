@@ -19,13 +19,27 @@ const Dashboard = () => {
   const [jam, setJam] = useState(dateformat(Date.now(), "HH:MM:ss"));
   const [load, setLoad] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [show, setShow] = useState(false);
+  const [foot, setFoot] = useState(true);
   const last = data.length - 1;
 
-  document.title = "Smart Hydroponic";
+  // document.title = "Smart Hydroponic";
 
   const handleOpen = () => {
-    setIsOpen(!isOpen);
-    console.log(last);
+    if (!show) {
+      setShow(true);
+      setTimeout(() => {
+        setIsOpen(true);
+      }, 100);
+    } else {
+      setIsOpen(false);
+      setFoot(true);
+
+      setTimeout(() => {
+        setShow(false);
+        setFoot(false);
+      }, 1000);
+    }
   };
 
   useEffect(() => {
@@ -46,6 +60,7 @@ const Dashboard = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoad(false);
+      setFoot(false);
     }, 500);
   }, []);
 
@@ -72,13 +87,15 @@ const Dashboard = () => {
               <Header.Content>
                 SISTEM KONTROL OTOMATIS KEPEKATAN AIR NUTRISI HIDROPONIK
                 BERBASIS INTERNET OF THINGS (IOT)
-                <Header.Subheader>
+                <Header.Subheader style={{ color: "rgb(199 199 199)" }}>
                   I WAYAN SUSTRISNA PUTRA (1715344007)
                 </Header.Subheader>
-                <Header.Subheader>
+                <Header.Subheader style={{ color: "rgb(199 199 199)" }}>
                   PROGRAM STUDI D4 TEKNIK OTOMASI
                 </Header.Subheader>
-                <Header.Subheader>JURUSAN TEKNIK ELEKTRO</Header.Subheader>
+                <Header.Subheader style={{ color: "rgb(199 199 199)" }}>
+                  JURUSAN TEKNIK ELEKTRO
+                </Header.Subheader>
               </Header.Content>
             </Header>
           </Transition>
@@ -88,7 +105,7 @@ const Dashboard = () => {
             <Header style={{ margin: "auto" }} as="h1" textAlign="center">
               <Header.Content>
                 SMART HYDROPONIC
-                <Header.Subheader>
+                <Header.Subheader style={{ color: "rgb(199 199 199)" }}>
                   Desa Sanding, Tampaksiring, Gianyar - Bali
                 </Header.Subheader>
               </Header.Content>
@@ -104,7 +121,18 @@ const Dashboard = () => {
               color="blue"
               style={{ overflow: "hidden" }}
             >
-              <Statistic label="Today" value={jam} color="blue" />
+              <Statistic color="blue">
+                <Statistic.Value>
+                  <span
+                    style={{
+                      fontSize: "3.5rem",
+                    }}
+                  >
+                    {jam}
+                  </span>
+                </Statistic.Value>
+                <Statistic.Label>Today</Statistic.Label>
+              </Statistic>
             </Segment>
           </Grid.Column>
         </Transition>
@@ -112,7 +140,15 @@ const Dashboard = () => {
           <Grid.Column>
             <Segment textAlign="center" color="violet">
               <Statistic color="violet">
-                <Statistic.Value>{data[last]?.tds || 0.0} PPM</Statistic.Value>
+                <Statistic.Value>
+                  <span
+                    style={{
+                      fontSize: "3rem",
+                    }}
+                  >
+                    {data[last]?.tds || 0.0} PPM
+                  </span>
+                </Statistic.Value>
                 <Statistic.Label>TDS</Statistic.Label>
               </Statistic>
             </Segment>
@@ -121,9 +157,16 @@ const Dashboard = () => {
         <Transition visible={!load} animation="slide down" duration={1200}>
           <Grid.Column>
             <Segment textAlign="center" color="purple">
-              {/* <Statistic label="Flow Rate" value={0} color="purple" /> */}
               <Statistic color="purple">
-                <Statistic.Value>{data[last]?.flow1 || 0.0} MM</Statistic.Value>
+                <Statistic.Value>
+                  <span
+                    style={{
+                      fontSize: "3rem",
+                    }}
+                  >
+                    {data[last]?.flow1 || 0.0} MM
+                  </span>
+                </Statistic.Value>
                 <Statistic.Label>FLOW METER</Statistic.Label>
               </Statistic>
             </Segment>
@@ -142,54 +185,60 @@ const Dashboard = () => {
           </Button>
 
           {/* </div> */}
-
-          <Transition visible={isOpen} animation="slide down" duration={1200}>
-            <Grid.Column>
-              <Segment
-                textAlign="center"
-                color="orange"
-                style={{ overflow: "auto", maxHeight: "300px" }}
-              >
-                <Table size="small" celled unstackable striped fluid>
-                  <Table.Header>
-                    <Table.Row textAlign="center">
-                      <Table.HeaderCell>Day</Table.HeaderCell>
-                      <Table.HeaderCell>TDS</Table.HeaderCell>
-                      <Table.HeaderCell>Nutrisi A</Table.HeaderCell>
-                      <Table.HeaderCell>Nutrisi B</Table.HeaderCell>
-                    </Table.Row>
-                  </Table.Header>
-                  <Table.Body>
-                    {data
-                      .slice(0)
-                      .reverse()
-                      .map((data, idx) => {
-                        return (
-                          <Table.Row keys={idx} textAlign="center">
-                            <Table.Cell>
-                              {dateformat(data.waktu, "dd-mm-yyyy HH:MM:ss")}
-                            </Table.Cell>
-                            <Table.Cell>{data.tds}</Table.Cell>
-                            <Table.Cell>{data.flow1}</Table.Cell>
-                            <Table.Cell>{data.flow2}</Table.Cell>
-                          </Table.Row>
-                        );
-                      })}
-                  </Table.Body>
-                </Table>
-              </Segment>
-            </Grid.Column>
-          </Transition>
+          {show && (
+            <Transition visible={isOpen} animation="slide down" duration={600}>
+              <Grid.Column>
+                <Segment
+                  textAlign="center"
+                  color="orange"
+                  style={{
+                    overflow: "auto",
+                    maxHeight: "300px",
+                  }}
+                >
+                  <Table size="small" celled unstackable striped>
+                    <Table.Header>
+                      <Table.Row textAlign="center">
+                        <Table.HeaderCell>Day</Table.HeaderCell>
+                        <Table.HeaderCell>TDS</Table.HeaderCell>
+                        <Table.HeaderCell>Nutrisi A</Table.HeaderCell>
+                        <Table.HeaderCell>Nutrisi B</Table.HeaderCell>
+                      </Table.Row>
+                    </Table.Header>
+                    <Table.Body>
+                      {data
+                        .slice(0)
+                        .reverse()
+                        .map((data, idx) => {
+                          return (
+                            <Table.Row key={idx} textAlign="center">
+                              <Table.Cell>
+                                {dateformat(data.waktu, "dd-mm-yyyy HH:MM:ss")}
+                              </Table.Cell>
+                              <Table.Cell>{data.tds}</Table.Cell>
+                              <Table.Cell>{data.flow1}</Table.Cell>
+                              <Table.Cell>{data.flow2}</Table.Cell>
+                            </Table.Row>
+                          );
+                        })}
+                    </Table.Body>
+                  </Table>
+                </Segment>
+              </Grid.Column>
+            </Transition>
+          )}
         </Grid.Row>
       </Transition>
 
-      <Transition visible={!load} animation="slide down" duration={1500}>
+      <Transition visible={!foot} animation="slide down" duration={1000}>
         <Grid.Row columns="1">
           <Grid.Column>
             <Header as="h1" textAlign="center" color="grey">
               <Header.Content>
-                <Header.Subheader style={{ fontSize: "0.9rem" }}>
-                  <b>Dibiayai Oleh :</b>
+                <Header.Subheader
+                  style={{ fontSize: "0.9rem", color: "rgb(199 199 199)" }}
+                >
+                  <b style={{ color: "rgb(40 40 40)" }}>Dibiayai Oleh :</b>
                   <br />
                   Penelitian Unggulan Strategis P3M PNB
                   <br />
