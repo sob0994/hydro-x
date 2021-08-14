@@ -113,7 +113,7 @@ const Dashboard = () => {
           </Transition>
         </Grid.Column>
       </Grid.Row>
-      <Grid.Row columns="3">
+      <Grid.Row columns="4">
         <Transition visible={!load} animation="slide down" duration={1200}>
           <Grid.Column>
             <Segment
@@ -167,7 +167,25 @@ const Dashboard = () => {
                     {data[last]?.flow1 || 0.0} MM
                   </span>
                 </Statistic.Value>
-                <Statistic.Label>FLOW METER</Statistic.Label>
+                <Statistic.Label>NUTRISI A</Statistic.Label>
+              </Statistic>
+            </Segment>
+          </Grid.Column>
+        </Transition>
+        <Transition visible={!load} animation="slide down" duration={1200}>
+          <Grid.Column>
+            <Segment textAlign="center" color="teal">
+              <Statistic color="teal">
+                <Statistic.Value>
+                  <span
+                    style={{
+                      fontSize: "3rem",
+                    }}
+                  >
+                    {data[last]?.flow2 || 0.0} MM
+                  </span>
+                </Statistic.Value>
+                <Statistic.Label>NUTRISI B</Statistic.Label>
               </Statistic>
             </Segment>
           </Grid.Column>
