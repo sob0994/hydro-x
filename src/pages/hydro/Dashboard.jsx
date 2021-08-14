@@ -243,6 +243,21 @@ const Dashboard = () => {
                   Penelitian Unggulan Strategis P3M PNB
                   <br />
                   Dr. Anak Agung Ngurah Gde Sapteka, CIRR.
+                  <div
+                    style={{
+                      cursor: "pointer",
+                      marginTop: "1rem",
+                      color: "lightgreen",
+                    }}
+                  >
+                    <a
+                      rel="noreferrer"
+                      target="_blank"
+                      href="https://drive.google.com/file/d/1yfnla4bsEh7k_UUvpmX6hrQFdPKPu314/view?usp=sharing"
+                    >
+                      Download Android Apk
+                    </a>
+                  </div>
                 </Header.Subheader>
               </Header.Content>
             </Header>
