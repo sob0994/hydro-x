@@ -218,9 +218,9 @@ const Dashboard = () => {
                     <Table.Header>
                       <Table.Row textAlign="center">
                         <Table.HeaderCell>Day</Table.HeaderCell>
-                        <Table.HeaderCell>TDS</Table.HeaderCell>
-                        <Table.HeaderCell>Nutrisi A</Table.HeaderCell>
-                        <Table.HeaderCell>Nutrisi B</Table.HeaderCell>
+                        <Table.HeaderCell>TDS (PPM)</Table.HeaderCell>
+                        <Table.HeaderCell>Nutrisi A (ML)</Table.HeaderCell>
+                        <Table.HeaderCell>Nutrisi B (ML)</Table.HeaderCell>
                       </Table.Row>
                     </Table.Header>
                     <Table.Body>
