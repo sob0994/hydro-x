@@ -164,7 +164,7 @@ const Dashboard = () => {
                       fontSize: "3rem",
                     }}
                   >
-                    {data[last]?.flow1 || 0.0} MM
+                    {data[last]?.flow1 || 0.0} ML
                   </span>
                 </Statistic.Value>
                 <Statistic.Label>NUTRISI A</Statistic.Label>
@@ -182,7 +182,7 @@ const Dashboard = () => {
                       fontSize: "3rem",
                     }}
                   >
-                    {data[last]?.flow2 || 0.0} MM
+                    {data[last]?.flow2 || 0.0} ML
                   </span>
                 </Statistic.Value>
                 <Statistic.Label>NUTRISI B</Statistic.Label>
